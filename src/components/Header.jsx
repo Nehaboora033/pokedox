@@ -24,7 +24,7 @@ const Header = () => {
             className={`w-full fixed top-0 left-0 z-10 bg-white transition-all duration-300 ${scrolled ? " py-2" : "py-4"
                 }`}
         >
-            <div className="max-w-[1164px] px-3 mx-auto w-full">
+            <div className="max-w-[1200px] px-3 mx-auto w-full">
                 <div className="mt-2.5 max-w-[800px] w-full p-4 shadow-input rounded-2xl flex bg-white">
                     <input
                         type="text"

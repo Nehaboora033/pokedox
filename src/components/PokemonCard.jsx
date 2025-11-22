@@ -2,14 +2,14 @@ import React from "react";
 
 const PokemonCard = ({ pokemons }) => {
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid md:grid-cols-3 min-[450px]:grid-cols-2 ">
       {pokemons.map(p => (
         <div
           key={p.id}
           className=" m-2.5 mt-20  p-4 pt-10 flex flex-col items-center justify-center relative shadow-lg rounded-2xl"
         >
           {/* ID */}
-          <p className="text-[#8f9396]">N{p.id}</p>
+          <p className="text-[#8f9396]">N°{p.id}</p>
 
           {/* Image */}
           {p.sprites && (
@@ -24,7 +24,7 @@ const PokemonCard = ({ pokemons }) => {
           <p className="m-1 text-[24px] font-bold capitalize">{p.name}</p>
 
           {/* Types */}
-          <div className="flex gap-2 items-center justify-center text-center">
+          <div className="flex gap-2 items-center justify-center text-center ">
             {p.types.map(t => {
               return (
                 <div
