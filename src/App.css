@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+    --shadow-input: #ededed 0 10px 10px;
+    --shadow-search: #ff535088 5px 5px 15px;
+    --shadow-hoversearch: #ff53509c 3px 3px 13px;
+}
+
+.searchhover:hover {
+    box-shadow: var(--shadow-hoversearch);
+}
