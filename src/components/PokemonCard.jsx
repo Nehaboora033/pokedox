@@ -19,7 +19,7 @@ const PokemonCard = ({ pokemons, onSelect }) => {
             <img
               src={p.sprites.front_default}
               alt={p.name}
-              className="w-[120px] h-[120px] absolute -top-17 group-hover:scale-[1.1]"
+              className="w-[110px] h-[120px] absolute -top-17 group-hover:scale-[1.1]"
             />
           )}
 
