@@ -8,10 +8,10 @@ function App() {
 
   return (
     <>
-      <div className='bg-no-repeat bg-cover bg-fixed' style={{
+      <div className='bg-no-repeat bg-cover ' style={{
         backgroundImage: `url(${pokemonball})`,
         backgroundSize: "500px",
-        backgroundPosition: "-100px 120px"
+        backgroundPosition: "-200px 150px"
       }}>
 
         <Header />

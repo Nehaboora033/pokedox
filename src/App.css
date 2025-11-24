@@ -9,3 +9,8 @@
 .searchhover:hover {
     box-shadow: var(--shadow-hoversearch);
 }
+
+.pokemon-gif {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
