@@ -2,10 +2,11 @@ import React from "react";
 import { typeColors } from "../utils/helper";
 
 
-const PokemonCard = ({ pokemons, onSelect }) => {
+const PokemonCard = ({ pokemons, onSelect, search }) => {
+  const filtered = pokemons.filter(p => p.name.includes(search));
   return (
     <div className="grid md:grid-cols-3 min-[450px]:grid-cols-2  ">
-      {pokemons.map(p => (
+      {filtered.map(p => (
         <div
           key={p.id}
           onClick={() => onSelect(p)}

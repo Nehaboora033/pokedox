@@ -2,7 +2,7 @@
 import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ search, setSearch }) => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -29,6 +29,8 @@ const Header = () => {
                     <input
                         type="text"
                         placeholder="Search your Pokemon"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value.toLowerCase())}
                         className="w-full outline-none placeholder:text-lg placeholder:text-grey-400"
                     />
                     <div className="size-10 flex items-center justify-center cursor-pointer bg-[#ff5350] rounded-[10px] shadow-search hover:opacity-[0.8] searchhover">

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import PokemonCard from './PokemonCard'
 import SearchCard from './SearchCard'
 
-const Hero = () => {
+const Hero = ({ search }) => {
     const [allPokemonUrls, setAllPokemonUrls] = useState([])
     const [visiblePokemons, setVisiblePokemons] = useState([])
     const [selectedPokemon, setSelectedPokemon] = useState(null)
@@ -81,7 +81,7 @@ const Hero = () => {
     return (
         <div className="max-w-[1200px] mx-auto px-2 w-full pt-[120px] bg-no-repeat bg-cover relative ">
             <div className="max-w-[790px] w-full ">
-                <PokemonCard pokemons={visiblePokemons} onSelect={handleSelect} />
+                <PokemonCard pokemons={visiblePokemons} onSelect={handleSelect} search={search} />
             </div>
             <div className="max-w-[350px] z-20 w-full h-[85vh] fixed right-[150px] mx-3 mt-3 bottom-0 rounded-2xl shadow-xl">
                 <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
