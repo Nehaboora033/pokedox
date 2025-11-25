@@ -1,31 +1,9 @@
-"use client";
+
 import { Search } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
 const Header = ({ search, setSearch }) => {
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     return (
-        <div
-            className={`w-full fixed top-0 left-0 z-10 bg-white transition-all duration-300 ${scrolled ? " py-2" : "py-4"
-                }`}
-        >
-            <div className="max-w-[1200px] px-3 mx-auto w-full">
-                <div className="mt-2.5 max-w-[800px] w-full p-4 shadow-input rounded-2xl flex bg-white">
+                <div className="p-4 m-3 shadow-input rounded-2xl flex bg-white sticky top-0 z-10">
                     <input
                         type="text"
                         placeholder="Search your Pokemon"
@@ -37,8 +15,6 @@ const Header = ({ search, setSearch }) => {
                         <Search className="stroke-white" />
                     </div>
                 </div>
-            </div>
-        </div>
     );
 };
 

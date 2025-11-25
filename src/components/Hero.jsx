@@ -1,21 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, } from 'react'
 import PokemonCard from './PokemonCard'
 import SearchCard from './SearchCard'
+import gsap from "gsap";
+import Container from './Container';
+import Header from './Header';
 
-const Hero = ({ search }) => {
+const Hero = () => {
     const [allPokemonUrls, setAllPokemonUrls] = useState([])
     const [visiblePokemons, setVisiblePokemons] = useState([])
     const [selectedPokemon, setSelectedPokemon] = useState(null)
+    const [search, setSearch] = useState("")
     const [batch, setBatch] = useState(0)
     const [pokemonDescription, setPokemonDescription] = useState("")
     const [evolution, setEvolution] = useState(null);
     const isLoading = useRef(false)
-    const BATCH_SIZE = 30
+    const BATCH_SIZE = 30;
+
 
     const loadBatch = async (urls, batchIndex) => {
         if (isLoading.current) return  // ⛔ block duplicate calls
         isLoading.current = true
-
         const slice = urls.slice(batchIndex * BATCH_SIZE, (batchIndex + 1) * BATCH_SIZE)
         const detailed = await Promise.all(
             slice.map(poke => fetch(poke.url).then(r => r.json()))
@@ -24,6 +28,16 @@ const Hero = ({ search }) => {
         setVisiblePokemons(prev => [...prev, ...detailed])
         isLoading.current = false
     }
+
+    // for animation
+    useEffect(() => {
+        if (selectedPokemon) {
+            gsap.fromTo(cardRef.current,
+                { y: 600, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.4, ease: "power1.in" }
+            );
+        }
+    }, [selectedPokemon]);
 
     useEffect(() => {
         const fetchPokemons = async () => {
@@ -34,6 +48,8 @@ const Hero = ({ search }) => {
         }
         fetchPokemons()
     }, [])
+
+    const cardRef = useRef(null);
 
     const fetchEvolution = async (pokemon) => {
         const responseSpecies = await fetch(pokemon.species.url);
@@ -79,14 +95,31 @@ const Hero = ({ search }) => {
     }, [handleScroll])
 
     return (
-        <div className="max-w-[1200px] mx-auto px-2 w-full pt-[120px] bg-no-repeat bg-cover relative ">
-            <div className="max-w-[790px] w-full ">
-                <PokemonCard pokemons={visiblePokemons} onSelect={handleSelect} search={search} />
+        <>
+            <div>
+                <Container>
+                    <div className='flex justify-between'>
+                        <div className='lg:w-[65%] w-full'>
+                            <Header search={search} setSearch={setSearch} />
+                            <PokemonCard pokemons={visiblePokemons} onSelect={handleSelect} search={search} />
+                        </div>
+                        {/* Desktop (sticky) */}
+                        <div
+                            ref={cardRef}
+                            className="lg:w-[34%] lg:block hidden w-full shadow-input lg:sticky top-0 h-screen"
+                        >
+                            <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
+                        </div>
+
+                        {/* Mobile (bottom sheet) */}
+                        {selectedPokemon && (<div
+                            className={`lg:hidden fixed left-0 top-0 w-full bg-white shadow-xl ease-in-out p-3 transition-all duration-500 z-50 overflow-y-auto ${selectedPokemon ? 'bottom-0' : ''}`}>
+                            <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} setSelectedPokemon={setSelectedPokemon} />
+                        </div>)}
+                    </div>
+                </Container>
             </div>
-            <div className="max-w-[350px] z-20 w-full h-[85vh] fixed right-[150px] mx-3 mt-3 bottom-0 rounded-2xl shadow-xl">
-                <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
-            </div>
-        </div>
+        </>
     )
 }
 
