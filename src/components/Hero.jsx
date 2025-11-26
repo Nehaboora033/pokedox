@@ -4,6 +4,7 @@ import SearchCard from './SearchCard'
 import gsap from "gsap";
 import Container from './Container';
 import Header from './Header';
+import { typeColors } from '../utils/helper';
 
 const Hero = () => {
     const [allPokemonUrls, setAllPokemonUrls] = useState([])
@@ -15,7 +16,10 @@ const Hero = () => {
     const [evolution, setEvolution] = useState(null);
     const isLoading = useRef(false)
     const BATCH_SIZE = 30;
-
+    const bgColor =
+        selectedPokemon?.types?.length
+            ? typeColors[selectedPokemon.types[0].type.name]
+            : "transparent";
 
     const loadBatch = async (urls, batchIndex) => {
         if (isLoading.current) return  // ⛔ block duplicate calls
@@ -130,12 +134,13 @@ const Hero = () => {
                         </div>
                         {/* RIGHT PANEL */}
                         <div>
-                            <div className="w-[360px] fixed right-[100px] shadow-input  bottom-0 h-[80vh] max-lg:hidden">
+                            <div className="w-[360px] fixed right-[100px] shadow-input bottom-0 h-[80vh] max-lg:hidden">
                                 <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
                             </div>
                             <div
                                 ref={redRef}
-                                className="lg:hidden fixed left-0 -bottom-full w-full h-full bg-red-500 z-50"
+                                style={{ backgroundColor: bgColor }}
+                                className="lg:hidden fixed left-0 -bottom-full w-full h-full  z-50 "
                             >
                                 {/* button */}
                                 <div className='flex w-fit float-end bg-white rounded-lg m-6 '>
@@ -151,7 +156,7 @@ const Hero = () => {
                                     <div>
                                         <div
                                             ref={bottomSheetRef}
-                                            className="lg:hidden fixed left-0 -bottom-full w-full  h-[80vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 ">
+                                            className="lg:hidden  fixed left-0 -bottom-full w-full  h-[85vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 max-sm:overflow-y-auto ">
                                             {selectedPokemon && (
                                                 <SearchCard
                                                     pokemon={selectedPokemon}

@@ -13,13 +13,13 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
   }
 
   return (
-    <div className={`flex h-screen mt-[10vh] w-full flex-col mx-auto bg-white z-20 `}>
+    <div className={`flex items-center h-screen lg:mt-[10vh] max-lg:w-[600px] max-sm:w-full flex-col mx-auto bg-white z-20 `}>
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
         alt={pokemon.name}
-        className='pokemon-gif lg:w-[145px] w-[160px] absolute  bottom-[90%] block mx-auto  translate-x-[80%]'
+        className='pokemon-gif lg:w-[145px] w-[130px]  absolute block mx-auto bottom-[90%] max-lg:fixed max-lg:bottom-[80%] max-sm:bottom-[70%]'
       />
-      <div className='text-center '>
+      <div className='text-center max-lg:pt-[50px] max-sm:pt-[100px] '>
         {/* {id} */}
         <p className='text-[#8f9396] font-bold'>N°{pokemon.id}</p>
         {/* name */}
