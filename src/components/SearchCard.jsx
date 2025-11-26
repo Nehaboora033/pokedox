@@ -6,7 +6,7 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
   if (!pokemon) {   //empty no pokemon select 
     return (
       <div className={`text-[20px] text-center bg-white  text-gray-400  font-semibold flex flex-col  items-center justify-center h-screen  `}>
-        <img src={pikachu} alt="pikachu" className='fixed bottom-[70%] ' />
+        <img src={pikachu} alt="pikachu" className='fixed bottom-[70%]' />
         Select a Pokémon to<br />display here.
       </div>
     )

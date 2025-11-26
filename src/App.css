@@ -14,3 +14,7 @@
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
