@@ -29,16 +29,6 @@ const Hero = () => {
         isLoading.current = false
     }
 
-    // for animation
-    useEffect(() => {
-        if (selectedPokemon) {
-            gsap.fromTo(cardRef.current,
-                { y: 600, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.4, ease: "power1.in" }
-            );
-        }
-    }, [selectedPokemon]);
-
     useEffect(() => {
         const fetchPokemons = async () => {
             const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=800')
@@ -48,8 +38,6 @@ const Hero = () => {
         }
         fetchPokemons()
     }, [])
-
-    const cardRef = useRef(null);
 
     const fetchEvolution = async (pokemon) => {
         const responseSpecies = await fetch(pokemon.species.url);
@@ -94,28 +82,91 @@ const Hero = () => {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [handleScroll])
 
+    const bottomSheetRef = useRef();
+    const redRef = useRef();
+
+    // animation useeffect
+    useEffect(() => {
+        if (selectedPokemon) {
+            gsap.to(bottomSheetRef.current, {
+                bottom: 0,
+                duration: 0.35,
+                ease: "power3.in"
+            });
+        } else {
+            gsap.to(bottomSheetRef.current, {
+                bottom: "-100%",
+                duration: 0.35,
+                ease: "power3.in"
+            });
+        }
+    }, [selectedPokemon]);
+
+    useEffect(() => {
+        if (selectedPokemon) {
+            gsap.to(redRef.current, {
+                bottom: 0,
+                duration: 0.35,
+                ease: "power3.out"
+            });
+        } else {
+            gsap.to(redRef.current, {
+                bottom: "-100%",
+                duration: 0.35,
+                ease: "power3.in"
+            });
+        }
+    }, [selectedPokemon]);
+
     return (
         <>
             <div>
                 <Container>
-                    <div className='flex justify-between'>
-                        <div className='lg:w-[65%] w-full'>
+                    <div className='flex w-full relative'>
+                        {/* LEFT LIST */}
+                        <div className="flex-1 mr-[460px] max-lg:mr-0">
                             <Header search={search} setSearch={setSearch} />
                             <PokemonCard pokemons={visiblePokemons} onSelect={handleSelect} search={search} />
                         </div>
-                        {/* Desktop (sticky) */}
-                        <div
-                            ref={cardRef}
-                            className="lg:w-[34%] lg:block hidden w-full shadow-input lg:sticky top-0 h-screen"
-                        >
-                            <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
-                        </div>
+                        {/* RIGHT PANEL */}
+                        <div>
+                            <div className="w-[360px] fixed right-[100px] shadow-input  bottom-0 h-[80vh] max-lg:hidden">
+                                <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
+                            </div>
+                            <div
+                                ref={redRef}
+                                className="lg:hidden fixed left-0 -bottom-full w-full h-full bg-red-500 z-50"
+                            >
+                                {/* button */}
+                                <div className='flex w-fit float-end bg-white rounded-lg m-6 '>
+                                    <button
+                                        onClick={() => setSelectedPokemon(null)}
+                                        className="p-2  w-fit   cursor-pointer">
+                                        <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.3136 9.89952L7.07095 5.65688L11.3136 1.41424L9.89938 2.58684e-05L5.65674 4.24267L1.4141 2.58684e-05L-0.000115871 1.41424L4.24252 5.65688L-0.000115871 9.89952L1.4141 11.3137L5.65674 7.07109L9.89938 11.3137L11.3136 9.89952Z" fill="black" />
+                                        </svg>
+                                    </button>
 
-                        {/* Mobile (bottom sheet) */}
-                        {selectedPokemon && (<div
-                            className={`lg:hidden fixed left-0 top-0 w-full bg-white shadow-xl ease-in-out p-3 transition-all duration-500 z-50 overflow-y-auto ${selectedPokemon ? 'bottom-0' : ''}`}>
-                            <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} setSelectedPokemon={setSelectedPokemon} />
-                        </div>)}
+                                    {/* search card */}
+                                    <div>
+                                        <div
+                                            ref={bottomSheetRef}
+                                            className="lg:hidden fixed left-0 -bottom-full w-full  h-[80vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 ">
+                                            {selectedPokemon && (
+                                                <SearchCard
+                                                    pokemon={selectedPokemon}
+                                                    description={pokemonDescription}
+                                                    evolution={evolution}
+                                                    setSelectedPokemon={setSelectedPokemon}
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
                 </Container>
             </div>
