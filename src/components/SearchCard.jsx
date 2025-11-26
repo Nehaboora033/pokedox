@@ -17,9 +17,9 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
         alt={pokemon.name}
-        className='pokemon-gif lg:w-[145px] w-[130px]  fixed bottom-[80%] max-sm:bottom-[70%]'
+        className='pokemon-gif  w-[110px] md:fixed md:bottom-[80%] max-sm:bottom-[70%]'
       />
-      <div className='text-center max-lg:pt-[50px] max-sm:pt-[100px] '>
+      <div className='text-center max-lg:pt-10 max-md:pt-0'>
         {/* {id} */}
         <p className='text-[#8f9396] font-bold'>N°{pokemon.id}</p>
         {/* name */}

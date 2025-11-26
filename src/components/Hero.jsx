@@ -156,7 +156,7 @@ const Hero = () => {
                                     <div>
                                         <div
                                             ref={bottomSheetRef}
-                                            className="lg:hidden  fixed left-0 -bottom-full w-full  h-[85vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 max-sm:overflow-y-auto ">
+                                            className="lg:hidden  fixed left-0 -bottom-full w-full  h-[85vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 overflow-y-auto ">
                                             {selectedPokemon && (
                                                 <SearchCard
                                                     pokemon={selectedPokemon}
@@ -169,8 +169,6 @@ const Hero = () => {
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </Container>
