@@ -5,8 +5,8 @@ import pikachu from '../assets/no-pokemon-selected-image copy.png'
 const SearchCard = ({ pokemon, description, evolution, }) => {
   if (!pokemon) {   //empty no pokemon select 
     return (
-      <div className={`text-[20px] text-center bg-white relative  text-gray-400  font-semibold flex flex-col  items-center justify-center h-screen  `}>
-        <img src={pikachu} alt="pikachu" className='absolute -top-[140px]' />
+      <div className={`text-[20px] text-center bg-white  text-gray-400  font-semibold flex flex-col  items-center justify-center h-screen  `}>
+        <img src={pikachu} alt="pikachu" className='fixed bottom-[70%] ' />
         Select a Pokémon to<br />display here.
       </div>
     )
@@ -17,7 +17,7 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
         alt={pokemon.name}
-        className='pokemon-gif lg:w-[145px] w-[130px]  absolute block mx-auto bottom-[90%] max-lg:fixed max-lg:bottom-[80%] max-sm:bottom-[70%]'
+        className='pokemon-gif lg:w-[145px] w-[130px]  fixed bottom-[80%] max-sm:bottom-[70%]'
       />
       <div className='text-center max-lg:pt-[50px] max-sm:pt-[100px] '>
         {/* {id} */}

@@ -134,7 +134,7 @@ const Hero = () => {
                         </div>
                         {/* RIGHT PANEL */}
                         <div>
-                            <div className="w-[360px] fixed right-[100px] shadow-input bottom-0 h-[80vh] max-lg:hidden">
+                            <div className="w-[360px] fixed right-[100px] shadow-input bottom-0 h-[85vh] overflow-y-auto max-lg:hidden">
                                 <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
                             </div>
                             <div
