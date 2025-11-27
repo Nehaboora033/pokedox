@@ -134,7 +134,7 @@ const Hero = () => {
                         </div>
                         {/* RIGHT PANEL */}
                         <div>
-                            <div className="w-[360px] fixed right-[100px] shadow-input bottom-0 h-[85vh] overflow-y-auto max-lg:hidden">
+                            <div className="w-[360px] fixed right-[100px] shadow-input bottom-0 h-[90vh]  max-lg:hidden">
                                 <SearchCard pokemon={selectedPokemon} description={pokemonDescription} evolution={evolution} />
                             </div>
                             <div
@@ -156,7 +156,7 @@ const Hero = () => {
                                     <div>
                                         <div
                                             ref={bottomSheetRef}
-                                            className="lg:hidden  fixed left-0 -bottom-full w-full  h-[85vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 overflow-y-auto ">
+                                            className="lg:hidden  fixed left-0 bottom-0 w-full h-[88vh] xl:h-[85vh] bg-white rounded-t-2xl shadow-xl p-3 z-50 max-sm:overflow-y-auto">
                                             {selectedPokemon && (
                                                 <SearchCard
                                                     pokemon={selectedPokemon}

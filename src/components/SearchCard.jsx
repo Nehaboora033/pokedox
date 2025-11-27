@@ -5,20 +5,26 @@ import pikachu from '../assets/no-pokemon-selected-image copy.png'
 const SearchCard = ({ pokemon, description, evolution, }) => {
   if (!pokemon) {   //empty no pokemon select 
     return (
-      <div className={`text-[20px] text-center bg-white  text-gray-400  font-semibold flex flex-col  items-center justify-center h-screen  `}>
-        <img src={pikachu} alt="pikachu" className='fixed bottom-[70%]' />
+      <div className={`text-[20px] h-screen text-center relative text-gray-400  font-semibold flex flex-col  items-center justify-center  `}>
+        <img src={pikachu} alt="pikachu" className='absolute bottom-[80%]' />
         Select a Pokémon to<br />display here.
       </div>
     )
   }
 
   return (
-    <div className={`flex items-center h-screen lg:mt-[10vh] max-lg:w-[600px] max-sm:w-full flex-col mx-auto bg-white z-20 `}>
-      <img
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
-        alt={pokemon.name}
-        className='pokemon-gif  w-[110px] md:fixed md:bottom-[80%] max-sm:bottom-[70%]'
-      />
+    <div className={`flex bg-whhite items-center h-screen lg:mt-[10vh] max-lg:w-[600px] max-sm:w-full flex-col mx-auto  z-20 `}>
+      
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
+          alt={pokemon.name}
+          className='pokemon-gif w-[100px] md:fixed md:bottom-[83%] max-sm:bottom-[70%]'
+          onError={(e) => {
+            e.target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+          }}
+        />
+    
+
       <div className='text-center max-lg:pt-10 max-md:pt-0'>
         {/* {id} */}
         <p className='text-[#8f9396] font-bold'>N°{pokemon.id}</p>
@@ -47,14 +53,14 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
 
         {/* height and weight */}
         <div className='flex '>
-          <div className='w-1/2 m-1'>
-            <p className='m-1 font-bold'>Height</p>
+          <div className='w-1/2 mx-1'>
+            <p className='mt-1 font-bold'>Height</p>
             <div className='bg-[#f6f8fc] p-2 m-1 rounded-4xl font-medium text-[14px]'>
               {pokemon.height / 10 + "m"}
             </div>
           </div>
-          <div className='w-1/2 m-1'>
-            <p className='m-1  font-bold'>Weight</p>
+          <div className='w-1/2 mx-1'>
+            <p className='  font-bold mt-1'>Weight</p>
             <div className='bg-[#f6f8fc] p-2 m-1 rounded-4xl font-medium text-[14px]'>
               {pokemon.weight / 10 + "kg"}
             </div>
@@ -66,7 +72,7 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
           <p className='m-1 mt-2 font-bold'>
             Abilities
           </p>
-          <div className='flex-row flex sm:gap-2 gap-1 m-1  items-center '>
+          <div className='flex-row flex sm:gap-2 gap-1 mx-1  items-center '>
             {pokemon.abilities?.map(a => (
               <div
                 key={a.ability.name}
@@ -121,8 +127,8 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
 
         {/* evolution */}
         {evolution && (
-          <div className='mt-4'>
-            <p className='m-1 mt-2 font-bold'>
+          <div className='mt-2'>
+            <p className='font-bold'>
               Evolution
             </p>
 
@@ -132,11 +138,11 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
               <div className='flex flex-col items-center'>
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.chain.species.url.split("/")[6]}.png`}
-                  className='size-[70px] '
+                  className='size-[60px] '
                 />
-                <p className='text-[12px] font-semibold capitalize'>
+                {/* <p className='text-[12px] font-semibold capitalize'>
                   {evolution.chain.species.name}
-                </p>
+                </p> */}
               </div>
 
               {/* STAGE 2 */}
@@ -149,11 +155,11 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
                   <div className='flex flex-col items-center'>
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.chain.evolves_to[0].species.url.split("/")[6]}.png`}
-                      className='size-[70px]'
+                      className='size-[60px]'
                     />
-                    <p className='text-[12px] font-semibold capitalize'>
+                    {/* <p className='text-[12px] font-semibold capitalize'>
                       {evolution.chain.evolves_to[0].species.name}
-                    </p>
+                    </p> */}
                   </div>
                 </>
               )}
@@ -168,11 +174,11 @@ const SearchCard = ({ pokemon, description, evolution, }) => {
                   <div className='flex flex-col items-center'>
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.chain.evolves_to[0].evolves_to[0].species.url.split("/")[6]}.png`}
-                      className='size-[70px]'
+                      className='size-[60px]'
                     />
-                    <p className='text-[12px] font-semibold capitalize'>
+                    {/* <p className='text-[12px] font-semibold capitalize'>
                       {evolution.chain.evolves_to[0].evolves_to[0].species.name}
-                    </p>
+                    </p> */}
                   </div>
                 </>
               )}
