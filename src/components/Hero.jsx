@@ -91,34 +91,28 @@ const Hero = () => {
 
     // animation useeffect
     useEffect(() => {
-        if (selectedPokemon) {
-            gsap.to(bottomSheetRef.current, {
-                bottom: 0,
-                duration: 0.35,
-                ease: "power3.in"
-            });
-        } else {
-            gsap.to(bottomSheetRef.current, {
-                bottom: "-100%",
-                duration: 0.35,
-                ease: "power3.in"
-            });
-        }
-    }, [selectedPokemon]);
+        const tl = gsap.timeline();
 
-    useEffect(() => {
         if (selectedPokemon) {
-            gsap.to(redRef.current, {
+            tl.to(redRef.current, {
                 bottom: 0,
                 duration: 0.35,
                 ease: "power3.out"
-            });
+            }).to(bottomSheetRef.current, {
+                bottom: 0,
+                duration: 0.35,
+                ease: "power3.out"
+            }, "<"); // "<" = start at same time
         } else {
-            gsap.to(redRef.current, {
+            tl.to(bottomSheetRef.current, {
                 bottom: "-100%",
                 duration: 0.35,
                 ease: "power3.in"
-            });
+            }).to(redRef.current, {
+                bottom: "-100%",
+                duration: 0.35,
+                ease: "power3.in"
+            }, "<");
         }
     }, [selectedPokemon]);
 
